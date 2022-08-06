@@ -11,7 +11,7 @@ module.exports = (logSources, printer) => {
     let cached = Array(logSources.length).fill(null);
     let i = 0;
     while(!allSourcesEmpty) {
-      const parallelEntries = await Promise.all(logSources.map((s, i) => cached[i] ? cached[i] : s.pop()));
+      const parallelEntries = await Promise.all(logSources.map((s, i) => cached[i] ? cached[i] : s.popAsync()));
       allSourcesEmpty = parallelEntries.every((log) => log === false || log === null);
       if(allSourcesEmpty) {
         break;
